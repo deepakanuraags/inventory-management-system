@@ -8,10 +8,23 @@ class Nav extends Component {
       <nav
         className="navbar navbar-expand-lg navbar-dark"
         style={{
-          backgroundColor: "#007bff"
+          backgroundColor: "rgb(35, 55, 88)",
+          minWidth: "15vw",
+          display: "flex",
+          flexDirection: "column"
         }}
       >
-        <button
+        <span
+          className="navbar-text"
+          style={{
+            backgroundColor: "rgb(35, 55, 88)",
+            marginBottom: "auto",
+            fontSize: "1.5em"
+          }}
+        >
+          Inventory Management System
+        </span>
+        {/* <button
           className="navbar-toggler"
           type="button"
           data-toggle="collapse"
@@ -19,17 +32,15 @@ class Nav extends Component {
           aria-controls="navbarNav"
           aria-expanded="false"
           aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
+        ></button> */}
         <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav">
+          <ul className="navbar-nav flex-column">
             <li className="nav-item">
               <Link className="nav-link" to="/Dashboard">
                 Dashboard
               </Link>
             </li>
-            <li className="nav-item">
+            <li className="nav-item ">
               <Link className="nav-link" to="/Products">
                 Products
               </Link>
@@ -51,15 +62,6 @@ class Nav extends Component {
             </li>
           </ul>
         </div>
-        <a
-          className="navbar-brand"
-          href="#"
-          style={{
-            fontWeight: "bold"
-          }}
-        >
-          Inventory Management System
-        </a>
       </nav>
     );
   }

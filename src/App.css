@@ -1,40 +1,31 @@
+.html {
+  height: 100%;
+}
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+  display: flex;
+  height: 100%;
   min-height: 100vh;
+}
+
+.App .appHeader {
+  font-size: 1.5em;
+  font-weight: bold;
+  background-color: rgb(35, 55, 88);
+  text-align: right;
+  padding: 10px;
+  color: white;
+  min-width: 85vw;
+}
+
+.App .appContent {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
-
-.App-link {
-  color: #61dafb;
+.navig {
+  min-width: 30vw;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.appContent .routeContent {
+  min-width: 80vw;
 }
 
 a.nav-link:after {
@@ -78,25 +69,43 @@ a.nav-link:hover:after {
   flex-direction: column;
   width: 75%;
   margin: auto;
+  border: 1px solid transparent;
+  border-radius: 5px;
 }
 
 .tableStyleCustom .tableHead {
   display: flex;
-  border-bottom: 1px solid #007bff;
   justify-content: space-around;
   text-decoration: bold;
-  color: #007bff;
-  font-size: 1.5em;
-  height: 40px;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 1.2em;
+  min-height: 40px;
+  align-items: center;
+  background-color: rgb(35, 55, 88);
+  border-top: 1px solid rgb(35, 55, 88);
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 }
-
+.tableStyleCustom .resultWrapper {
+  min-height: 0px;
+  max-height: 70vh;
+  overflow: auto;
+}
 .tableStyleCustom .tableItemStyleCustom {
   display: flex;
   justify-content: space-around;
   align-items: flex-start;
-  height: 40px;
+  align-items: center;
+  min-height: 40px;
+  color: #808080;
 }
 
-.tableStyleCustom .tableItemStyleCustom div {
+.tableStyleCustom .tableItemStyleCustom div,
+.tableHead div {
+  padding-left: 6px;
   width: 50%;
+}
+
+.tableStyleCustom .tableItemStyleCustom:nth-child(even) {
+  background-color: rgba(35, 55, 88, 0.22);
 }

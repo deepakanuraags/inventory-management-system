@@ -13,14 +13,19 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-          <Nav />
-          <Switch>
-            <Route path="/" exact component={Dashboard} />
-            <Route path="/products" component={Products} />
-            <Route path="/Supplier" component={Supplier} />
-            <Route path="/SupplyLogs" component={SupplyLogs} />
-            <Route path="/Orders" component={Orders} />
-          </Switch>
+          <Nav className="navig" />
+          <div className="appContent">
+            {/* <div className="appHeader">Inventory Management System</div> */}
+            <div className="routeContent">
+              <Switch>
+                <Route path="/" exact component={Dashboard} />
+                <Route path="/products" component={Products} />
+                <Route path="/Supplier" component={Supplier} />
+                <Route path="/SupplyLogs" component={SupplyLogs} />
+                <Route path="/Orders" component={Orders} />
+              </Switch>
+            </div>
+          </div>
         </div>
       </Router>
     );

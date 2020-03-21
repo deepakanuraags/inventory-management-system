@@ -34,14 +34,16 @@ class Supplier extends Component {
             <div>Name</div>
             <div>Address</div>
           </div>
-          {this.state.suppliers.map(function(item, idx) {
-            return (
-              <div key={item.id} className="tableItemStyleCustom">
-                <div>{item.name}</div>
-                <div>{item.address}</div>
-              </div>
-            );
-          })}
+          <div className="resultWrapper">
+            {this.state.suppliers.map(function(item, idx) {
+              return (
+                <div key={item.id} className="tableItemStyleCustom">
+                  <div>{item.name}</div>
+                  <div>{item.address}</div>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
     );
@@ -59,6 +61,48 @@ class Supplier extends Component {
     suppliersDummy.push(new supplierObj("4", "Wendys", "67 Montrose Avenue"));
     suppliersDummy.push(
       new supplierObj("5", "McDonalds", "68 Montrose Avenue")
+    );
+    suppliersDummy.push(
+      new supplierObj("6", "McDonalds", "68 Montrose Avenue")
+    );
+    suppliersDummy.push(
+      new supplierObj("7", "McDonalds", "68 Montrose Avenue")
+    );
+    suppliersDummy.push(
+      new supplierObj("8", "McDonalds", "68 Montrose Avenue")
+    );
+    suppliersDummy.push(
+      new supplierObj("9", "McDonalds", "68 Montrose Avenue")
+    );
+    suppliersDummy.push(
+      new supplierObj("10", "McDonalds", "68 Montrose Avenue")
+    );
+    suppliersDummy.push(
+      new supplierObj("11", "McDonalds", "68 Montrose Avenue")
+    );
+    suppliersDummy.push(
+      new supplierObj("12", "McDonalds", "68 Montrose Avenue")
+    );
+    suppliersDummy.push(
+      new supplierObj("13", "McDonalds", "68 Montrose Avenue")
+    );
+    suppliersDummy.push(
+      new supplierObj("14", "McDonalds", "68 Montrose Avenue")
+    );
+    suppliersDummy.push(
+      new supplierObj("15", "McDonalds", "68 Montrose Avenue")
+    );
+    suppliersDummy.push(
+      new supplierObj("16", "McDonalds", "68 Montrose Avenue")
+    );
+    suppliersDummy.push(
+      new supplierObj("17", "McDonalds", "68 Montrose Avenue")
+    );
+    suppliersDummy.push(
+      new supplierObj("18", "McDonalds", "68 Montrose Avenue")
+    );
+    suppliersDummy.push(
+      new supplierObj("19", "McDonalds", "68 Montrose Avenue")
     );
     return suppliersDummy;
   }
