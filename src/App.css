@@ -100,12 +100,24 @@ a.nav-link:hover:after {
   color: #808080;
 }
 
-.tableStyleCustom .tableItemStyleCustom div,
-.tableHead div {
+.tableStyleCustom .tableItemStyleCustom .customWidth,
+.tableHead .customWidth {
+  padding-left: 6px;
+  width: 50%;
+}
+.tableStyleCustom.products {
+  width: 100% !important;
+}
+
+.products .customWidthDesc {
   padding-left: 6px;
   width: 50%;
 }
 
 .tableStyleCustom .tableItemStyleCustom:nth-child(even) {
   background-color: rgba(35, 55, 88, 0.22);
+}
+
+.dropdown-menu.show {
+  transform: unset !important;
 }

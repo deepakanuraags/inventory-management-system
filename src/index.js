@@ -6,6 +6,8 @@ import "bootstrap/dist/css/bootstrap.css";
 import $ from "jquery";
 import Popper from "popper.js";
 import "bootstrap/dist/js/bootstrap.bundle.min";
+import "bootstrap-select/dist/css/bootstrap-select.min.css";
+import "bootstrap-select/dist/js/bootstrap-select.min.js";
 import * as serviceWorker from "./serviceWorker";
 
 ReactDOM.render(<App />, document.getElementById("root"));

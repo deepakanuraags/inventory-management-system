@@ -37,15 +37,15 @@ class Supplier extends Component {
         </button>
         <div className="tableStyleCustom">
           <div key="0" className="tableHead">
-            <div>Name</div>
-            <div>Address</div>
+            <div className="customWidth">Name</div>
+            <div className="customWidth">Address</div>
           </div>
           <div className="resultWrapper">
             {this.state.suppliers.map(function(item, idx) {
               return (
                 <div key={idx} className="tableItemStyleCustom">
-                  <div>{item.name}</div>
-                  <div>{item.address}</div>
+                  <div className="customWidth">{item.name}</div>
+                  <div className="customWidth">{item.address}</div>
                 </div>
               );
             })}
