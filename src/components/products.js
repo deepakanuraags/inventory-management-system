@@ -78,7 +78,7 @@ class Product extends Component {
     console.log("rendering");
     console.log(this.state.products);
     return (
-      <div className="wrapper">
+      <div className="wrapper productsWrapper">
         <button
           type="button"
           className="btn btn-primary popupButtonStyle"

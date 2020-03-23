@@ -1,0 +1,80 @@
+.ordersList {
+  margin: 0 auto;
+  margin-top: 100px;
+  max-height: 80vh;
+  padding: 50px;
+  overflow: auto;
+}
+.orderItem {
+  border: 1px solid rgb(35, 55, 88);
+  width: 700px;
+  border-radius: 5px;
+  position: relative;
+  padding: 16px;
+  margin: 0 auto;
+  margin-bottom: 30px;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.orderItem:hover {
+  /* background-color: #f7f5f5; */
+  /* box-shadow: 0 0 5px 1px lightgrey; */
+  transform: scale(1.03);
+  box-shadow: 0px 3px 23px 1px rgba(46, 74, 117, 1);
+}
+
+.orderItemList {
+  max-width: 400px;
+}
+
+.orderItemList .customWidthSerial {
+  width: 10% !important;
+}
+
+.orderItemList .tableStyleCustom {
+  width: unset !important;
+  margin: unset !important;
+  padding-top: unset !important;
+}
+
+.supplier .tableStyleCustom {
+  width: 450px !important;
+}
+
+.orderOwner {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+}
+
+.customerName {
+  border-bottom-left-radius: 5px;
+}
+.orderNo .orderNoDetail,
+.customerName .customerNameDetail {
+  color: #808080;
+  font-weight: 100;
+}
+
+.orderNo .orderNoHead,
+.customerName .customerNameHead {
+  /* color: #007bff; */
+  background-color: rgb(35, 55, 88);
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.orderNo,
+.customerName {
+  cursor: pointer;
+  max-width: 150px;
+  border-left: 1px solid black;
+  border-bottom: 1px solid black;
+}
+.orderNo .orderNoChild,
+.customerName .customerNameChild {
+  display: block;
+  font-weight: bold;
+  padding: 5px;
+}

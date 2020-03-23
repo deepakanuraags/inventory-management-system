@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import "./css/modal.css";
+import "./css/order.css";
 import Nav from "./nav.js";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Products from "./components/products";

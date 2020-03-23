@@ -27,7 +27,7 @@ class Supplier extends Component {
     console.log("rendering");
     console.log(this.state.suppliers);
     return (
-      <div className="wrapper">
+      <div className="wrapper supplier">
         <button
           type="button"
           className="btn btn-primary popupButtonStyle"
@@ -134,18 +134,9 @@ class Supplier extends Component {
 
   createSuppliers() {
     var suppliersDummy = new Array();
-    suppliersDummy.push(new SupplierModel("Bakers", "64 Montrose Avenue"));
-    suppliersDummy.push(
-      new SupplierModel("Pizza Makers", "65 Montrose Avenue")
-    );
-    suppliersDummy.push(
-      new SupplierModel("Corona Makers", "66 Montrose Avenue")
-    );
-    suppliersDummy.push(new SupplierModel("Wendys", "67 Montrose Avenue"));
-    suppliersDummy.push(new SupplierModel("McDonalds", "68 Montrose Avenue"));
-    suppliersDummy.push(new SupplierModel("McDonalds", "68 Montrose Avenue"));
-    suppliersDummy.push(new SupplierModel("McDonalds", "68 Montrose Avenue"));
-    suppliersDummy.push(new SupplierModel("McDonalds", "68 Montrose Avenue"));
+    for (var j = 0; j < 20; j++) {
+      suppliersDummy.push(new SupplierModel("Wendys", "67 Montrose Avenue"));
+    }
     return suppliersDummy;
   }
 }
