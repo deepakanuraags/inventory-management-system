@@ -1,6 +1,5 @@
 .ordersList {
   margin: 0 auto;
-  margin-top: 100px;
   max-height: 80vh;
   padding: 50px;
   overflow: auto;
@@ -77,4 +76,22 @@
   display: block;
   font-weight: bold;
   padding: 5px;
+}
+
+.addProducts {
+  display: flex;
+  flex-direction: column;
+}
+
+.orders .popup {
+  width: 35%;
+}
+.orders .popup .productList {
+  max-height: 45vh;
+  overflow: auto;
+  padding-right: 20px;
+}
+
+.productRow {
+  display: flex;
 }

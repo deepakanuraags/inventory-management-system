@@ -2,25 +2,28 @@ import React, { Component } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import Modal from "./reusable/modal";
-
+import config from "../config/config.json";
+import { SupplierService } from "../services/supplier-service";
 class SupplierModel {
-  name;
-  address;
-  constructor(name, address) {
-    this.name = name;
-    this.address = address;
+  supplierName;
+  supplierAddress;
+  constructor(supplierName, supplierAddress) {
+    this.supplierName = supplierName;
+    this.supplierAddress = supplierAddress;
   }
 }
 class Supplier extends Component {
+  supplierService = new SupplierService();
   state = {};
 
   constructor() {
     super();
     this.state = {
-      suppliers: this.createSuppliers(),
+      suppliers: [],
       modalToggle: false,
       addSupplier: new SupplierModel("", "")
     };
+    this.getSuppliers();
     this.handleChange = this.handleChange.bind(this);
   }
   render() {
@@ -44,8 +47,8 @@ class Supplier extends Component {
             {this.state.suppliers.map(function(item, idx) {
               return (
                 <div key={idx} className="tableItemStyleCustom">
-                  <div className="customWidth">{item.name}</div>
-                  <div className="customWidth">{item.address}</div>
+                  <div className="customWidth">{item.supplierName}</div>
+                  <div className="customWidth">{item.supplierAddress}</div>
                 </div>
               );
             })}
@@ -64,17 +67,17 @@ class Supplier extends Component {
                 type="text"
                 className="form-control"
                 placeholder="Enter name"
-                value={this.state.addSupplier.name}
-                onChange={evt => this.handleChange(evt, "name")}
+                value={this.state.addSupplier.supplierName}
+                onChange={evt => this.handleChange(evt, "supplierName")}
               />
 
               <label>Supplier Address</label>
               <input
                 className="form-control"
                 type="text"
-                placeholder="Enter address"
-                value={this.state.addSupplier.address}
-                onChange={evt => this.handleChange(evt, "address")}
+                placeholder="Enter supplierAddress"
+                value={this.state.addSupplier.supplierAddress}
+                onChange={evt => this.handleChange(evt, "supplierAddress")}
               />
             </div>
           </form>
@@ -84,19 +87,19 @@ class Supplier extends Component {
   }
 
   handleChange = (e, type) => {
-    if (type == "name") {
+    if (type == "supplierName") {
       e.persist();
       this.setState(prevState => {
         let addSupplier = Object.assign({}, prevState.addSupplier);
-        addSupplier.name = e.target.value;
+        addSupplier.supplierName = e.target.value;
         console.log(addSupplier);
         return { addSupplier };
       });
-    } else if (type == "address") {
+    } else if (type == "supplierAddress") {
       e.persist();
       this.setState(prevState => {
         let addSupplier = Object.assign({}, prevState.addSupplier);
-        addSupplier.address = e.target.value;
+        addSupplier.supplierAddress = e.target.value;
         console.log(addSupplier);
         return { addSupplier };
       });
@@ -104,19 +107,33 @@ class Supplier extends Component {
   };
 
   persistInBackend() {
-    console.log(this.state.addSupplier.name);
-    console.log(this.state.addSupplier.address);
+    console.log(this.state.addSupplier.supplierName);
+    console.log(this.state.addSupplier.supplierAddress);
     this.popupClose();
-    this.setState(prevState => {
-      let suppliers = [];
-      let addSupplier = Object.assign({}, prevState.addSupplier);
-      suppliers = suppliers.concat(prevState.suppliers);
-      suppliers.push(new SupplierModel(addSupplier.name, addSupplier.address));
-      addSupplier.address = "";
-      addSupplier.name = "";
-      console.log(this.state);
-      return { addSupplier, suppliers };
-    });
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(this.state.addSupplier)
+    };
+    fetch(config.backendUrl + "createSupplier", requestOptions)
+      .then(data =>
+        this.setState(prevState => {
+          let suppliers = [];
+          let addSupplier = Object.assign({}, prevState.addSupplier);
+          suppliers = suppliers.concat(prevState.suppliers);
+          suppliers.push(
+            new SupplierModel(
+              addSupplier.supplierName,
+              addSupplier.supplierAddress
+            )
+          );
+          addSupplier.supplierAddress = "";
+          addSupplier.supplierName = "";
+          console.log(this.state);
+          return { addSupplier, suppliers };
+        })
+      )
+      .catch(error => console.log("An error occured ", error));
   }
 
   onAddSupplier = e => {
@@ -132,12 +149,15 @@ class Supplier extends Component {
     });
   };
 
-  createSuppliers() {
-    var suppliersDummy = new Array();
-    for (var j = 0; j < 20; j++) {
-      suppliersDummy.push(new SupplierModel("Wendys", "67 Montrose Avenue"));
-    }
-    return suppliersDummy;
+  getSuppliers() {
+    this.supplierService
+      .getSuppliers()
+      .then(data => {
+        this.setState({ suppliers: data });
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 }
 

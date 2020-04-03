@@ -1,0 +1,130 @@
+.supplyLog {
+  display: flex;
+  flex-wrap: wrap;
+  border: 1px solid #d9d9d9;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.supplyLogColumn {
+  width: 150px;
+  padding: 5px;
+  text-align: center;
+}
+
+.supplyLogsWrapper {
+  margin: auto;
+  margin-top: 100px;
+  width: 910px;
+  padding: unset;
+}
+
+.supplyLogColumnHeader {
+  text-align: center;
+  color: rgb(19, 90, 208);
+  font-size: 12px;
+  text-align: center;
+}
+.supplyLogColumValue {
+  font-size: 22px;
+  word-break: break-all;
+  word-wrap: break-word;
+}
+
+.checkbox-container {
+  display: inline-block;
+  position: relative;
+}
+
+.checkbox-container label {
+  margin-top: 5px;
+  cursor: pointer;
+  background-color: #aaa;
+  border: 1px solid #fff;
+  border-radius: 20px;
+  display: inline-block;
+  position: relative;
+  transition: all 0.3s ease-out;
+  width: 45px;
+  height: 25px;
+  z-index: 2;
+}
+
+.checkbox-container label::after {
+  content: " ";
+  background-color: #fff;
+  border-radius: 50%;
+  position: absolute;
+  top: 1.5px;
+  left: 1px;
+  transform: translateX(0);
+  transition: transform 0.3s linear;
+  width: 20px;
+  height: 20px;
+  z-index: 3;
+}
+
+.checkbox-container input {
+  visibility: hidden;
+  position: absolute;
+  z-index: 2;
+}
+
+.checkbox-container input:checked + label::after {
+  transform: translateX(calc(100% + 0.5px));
+}
+
+.checkbox-container.purple .active-circle,
+.checkbox-container.purple input:checked + label {
+  background-color: #47b881;
+}
+.checkmark__circle {
+  stroke-dasharray: 166;
+  stroke-dashoffset: 166;
+  stroke-width: 2;
+  stroke-miterlimit: 10;
+  stroke: #7ac142;
+  fill: none;
+  animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+}
+
+.checkmark {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: block;
+  stroke-width: 2;
+  stroke: #fff;
+  stroke-miterlimit: 10;
+  margin: auto;
+  box-shadow: inset 0px 0px 0px #7ac142;
+  animation: fill 0.4s ease-in-out 0.4s forwards,
+    scale 0.3s ease-in-out 0.9s both;
+}
+
+.checkmark__check {
+  transform-origin: 50% 50%;
+  stroke-dasharray: 48;
+  stroke-dashoffset: 48;
+  animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+}
+
+@keyframes stroke {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes scale {
+  0%,
+  100% {
+    transform: none;
+  }
+  50% {
+    transform: scale3d(1.1, 1.1, 1);
+  }
+}
+@keyframes fill {
+  100% {
+    box-shadow: inset 0px 0px 0px 30px #7ac142;
+  }
+}

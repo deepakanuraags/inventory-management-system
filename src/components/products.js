@@ -3,15 +3,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import Modal from "./reusable/modal";
 import $ from "jquery";
+import { SupplierService } from "../services/supplier-service";
+import { ProductService } from "../services/product-service";
 
 class SupplierModel {
-  id;
-  name;
-  address;
-  constructor(id, name, address) {
-    this.id = id;
-    this.name = name;
-    this.address = address;
+  supplierName;
+  supplierAddress;
+  constructor(supplierName, supplierAddress) {
+    this.supplierName = supplierName;
+    this.supplierAddress = supplierAddress;
   }
 }
 
@@ -22,7 +22,7 @@ class ProductsModel {
   inventoryOnHand;
   minInventoryReq;
   productDesc;
-  supplierId;
+  supplierID;
   supplierName;
   constructor(
     productName,
@@ -31,7 +31,7 @@ class ProductsModel {
     inventoryOnHand,
     minInventoryReq,
     productDesc,
-    supplierId,
+    supplierID,
     supplierName
   ) {
     this.productName = productName;
@@ -40,25 +40,30 @@ class ProductsModel {
     this.inventoryOnHand = inventoryOnHand;
     this.minInventoryReq = minInventoryReq;
     this.productDesc = productDesc;
-    this.supplierId = supplierId;
+    this.supplierID = supplierID;
     this.supplierName = supplierName;
-    $(function() {
-      $("select").selectpicker();
-    });
+    // $(function() {
+    //   $("select").selectpicker();
+    // });
   }
 }
 class Product extends Component {
+  productService = new ProductService();
+  supplierService = new SupplierService();
   state = {};
 
   constructor() {
     super();
     this.state = {
-      products: this.createProducts(),
-      suppliers: this.createSuppliers(),
+      products: [],
+      suppliers: [],
       modalToggle: false,
       addProduct: this.createDummyProduct(),
       validations: this.createValidations()
     };
+    console.log(this.state);
+    this.getProducts();
+    this.getSuppliers();
     this.handleChange = this.handleChange.bind(this);
   }
 
@@ -162,13 +167,13 @@ class Product extends Component {
                       : "form-control is-invalid"
                   }
                   data-live-search="true"
-                  value={this.state.addProduct.supplierId}
-                  onChange={evt => this.handleChange(evt, "supplierId")}
+                  value={this.state.addProduct.supplierID}
+                  onChange={evt => this.handleChange(evt, "supplierID")}
                 >
                   {this.state.suppliers.map(function(item, idx) {
                     return (
-                      <option key={idx} value={item.id}>
-                        {item.name}
+                      <option key={idx} value={item.supplierId}>
+                        {item.supplierName}
                       </option>
                     );
                   })}
@@ -236,11 +241,11 @@ class Product extends Component {
         console.log(addProduct);
         return { addProduct };
       });
-    } else if (type == "supplierId") {
+    } else if (type == "supplierID") {
       e.persist();
       this.setState(prevState => {
         let addProduct = Object.assign({}, prevState.addProduct);
-        addProduct.supplierId = e.target.value;
+        addProduct.supplierID = e.target.value;
         console.log(addProduct);
         return { addProduct };
       });
@@ -295,7 +300,7 @@ class Product extends Component {
         return { validations };
       });
     }
-    if (this.state.addProduct.supplierId == "") {
+    if (this.state.addProduct.supplierID == "") {
       this.setState(prevState => {
         let validations = prevState.validations;
         validations.supplierValid = false;
@@ -367,15 +372,22 @@ class Product extends Component {
     console.log(this.state.addProduct);
     if (this.validateAddProduct()) {
       this.popupClose();
-      this.setState(prevState => {
-        let products = [];
-        let addProduct = Object.assign({}, prevState.addProduct);
-        products = products.concat(prevState.products);
-        products.push(addProduct);
-        this.clearState();
-        console.log(this.state);
-        return { addProduct, products };
-      });
+      this.productService
+        .createProduct(this.state.addProduct)
+        .then(data => {
+          this.setState(prevState => {
+            let products = [];
+            let addProduct = Object.assign({}, prevState.addProduct);
+            products = products.concat(prevState.products);
+            products.push(addProduct);
+            this.clearState();
+            console.log(this.state);
+            return { addProduct, products };
+          });
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
   }
 
@@ -390,6 +402,7 @@ class Product extends Component {
   }
   onAddProduct = e => {
     this.clearState();
+    this.setSupplier(this.state.suppliers);
     console.log(this.state);
     e.preventDefault();
     this.setState({
@@ -403,130 +416,38 @@ class Product extends Component {
     });
   };
 
-  createProducts() {
-    var productsDummy = new Array();
-    productsDummy.push(
-      new ProductsModel(
-        "Wendys",
-        45,
-        45,
-        60,
-        45,
-        "Chicken they provide us chicken",
-        0,
-        "Fresh Meat"
-      )
-    );
-    productsDummy.push(
-      new ProductsModel(
-        "Wendys",
-        45,
-        45,
-        60,
-        45,
-        "Chicken they provide us chicken",
-        0,
-        "Fresh Meat"
-      )
-    );
-    productsDummy.push(
-      new ProductsModel(
-        "Wendys",
-        45,
-        45,
-        60,
-        45,
-        "Chicken they provide us chicken",
-        0,
-        "Fresh Meat"
-      )
-    );
-    productsDummy.push(
-      new ProductsModel(
-        "Wendys",
-        45,
-        45,
-        60,
-        45,
-        "Chicken they provide us chicken",
-        0,
-        "Fresh Meat"
-      )
-    );
-    productsDummy.push(
-      new ProductsModel(
-        "Wendys",
-        45,
-        45,
-        60,
-        45,
-        "Chicken they provide us chicken",
-        0,
-        "Fresh Meat"
-      )
-    );
-    productsDummy.push(
-      new ProductsModel(
-        "Wendys",
-        45,
-        45,
-        60,
-        45,
-        "Chicken they provide us chicken",
-        0,
-        "Fresh Meat"
-      )
-    );
-    productsDummy.push(
-      new ProductsModel(
-        "Wendys",
-        45,
-        45,
-        60,
-        45,
-        "Chicken they provide us chicken",
-        0,
-        "Fresh Meat"
-      )
-    );
-    productsDummy.push(
-      new ProductsModel(
-        "Wendys",
-        45,
-        45,
-        60,
-        45,
-        "Chicken they provide us chicken",
-        0,
-        "Fresh Meat"
-      )
-    );
-    return productsDummy;
+  getProducts() {
+    this.productService
+      .getProducts()
+      .then(data => {
+        this.setState({ products: data });
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
-
-  createSuppliers() {
-    var suppliersDummy = new Array();
-    suppliersDummy.push(new SupplierModel(1, "Bakers", "64 Montrose Avenue"));
-    suppliersDummy.push(
-      new SupplierModel(2, "Pizza Makers", "65 Montrose Avenue")
-    );
-    suppliersDummy.push(
-      new SupplierModel(3, "Corona Makers", "66 Montrose Avenue")
-    );
-    suppliersDummy.push(new SupplierModel(4, "Wendys", "67 Montrose Avenue"));
-    suppliersDummy.push(
-      new SupplierModel(5, "McDonalds", "68 Montrose Avenue")
-    );
-    suppliersDummy.push(
-      new SupplierModel(6, "McDonalds", "68 Montrose Avenue")
-    );
-    suppliersDummy.push(
-      new SupplierModel(7, "McDonalds", "68 Montrose Avenue")
-    );
-    suppliersDummy.push(
-      new SupplierModel(8, "McDonalds", "68 Montrose Avenue")
-    );
-    return suppliersDummy;
+  setSupplier(data) {
+    if (data.length > 0) {
+      let temp = Object.assign({}, this.state.addProduct);
+      temp.supplierID = data[0].supplierId;
+      temp.supplierName = data[0].supplierName;
+      this.setState({ suppliers: data, addProduct: temp });
+    }
+  }
+  getSuppliers() {
+    this.supplierService
+      .getSuppliers()
+      .then(data => {
+        if (data.length > 0) {
+          this.setSupplier(data);
+          console.log(this.state);
+        } else {
+          this.setState({ suppliers: data });
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 }
 

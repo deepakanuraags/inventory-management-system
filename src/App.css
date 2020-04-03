@@ -53,6 +53,7 @@ a.nav-link:hover:after {
 }
 
 .wrapper {
+  word-wrap: break-word;
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -60,7 +61,8 @@ a.nav-link:hover:after {
 
 .popupButtonStyle {
   float: left;
-  width: 140px;
+  min-width: 160px;
+  max-width: 180px;
 }
 
 .tableStyleCustom {

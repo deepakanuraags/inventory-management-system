@@ -44,6 +44,7 @@
   padding: 20px;
   background: #fff;
   border-radius: 5px;
+  max-height: 80%;
   width: 30%;
   position: relative;
   transition: all 5s ease-in-out;
@@ -51,6 +52,10 @@
   top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.popup .content {
+  overflow: auto;
 }
 
 .popup h2 {
