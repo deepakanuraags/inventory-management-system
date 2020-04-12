@@ -371,23 +371,32 @@ class Product extends Component {
   persistInBackend() {
     console.log(this.state.addProduct);
     if (this.validateAddProduct()) {
-      this.popupClose();
-      this.productService
-        .createProduct(this.state.addProduct)
-        .then(data => {
-          this.setState(prevState => {
-            let products = [];
-            let addProduct = Object.assign({}, prevState.addProduct);
-            products = products.concat(prevState.products);
-            products.push(addProduct);
-            this.clearState();
-            console.log(this.state);
-            return { addProduct, products };
-          });
-        })
-        .catch(err => {
-          console.log(err);
-        });
+      let addProductTemp = Object.assign({}, this.state.addProduct);
+      addProductTemp.inventoryReceived = addProductTemp.inventoryOnHand;
+      this.setState(
+        {
+          addProduct: addProductTemp
+        },
+        () => {
+          this.popupClose();
+          this.productService
+            .createProduct(this.state.addProduct)
+            .then(data => {
+              this.setState(prevState => {
+                let products = [];
+                let addProduct = Object.assign({}, prevState.addProduct);
+                products = products.concat(prevState.products);
+                products.push(addProduct);
+                this.clearState();
+                console.log(this.state);
+                return { addProduct, products };
+              });
+            })
+            .catch(err => {
+              console.log(err);
+            });
+        }
+      );
     }
   }
 

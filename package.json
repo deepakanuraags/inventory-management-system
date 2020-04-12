@@ -12,6 +12,8 @@
     "@testing-library/user-event": "^7.2.1",
     "bootstrap": "^4.4.1",
     "bootstrap-select": "^1.13.12",
+    "highcharts": "^8.0.4",
+    "highcharts-react-official": "^3.0.0",
     "jquery": "^3.4.1",
     "json-loader": "^0.5.7",
     "moment": "^2.24.0",

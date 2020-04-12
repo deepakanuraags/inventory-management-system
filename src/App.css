@@ -123,3 +123,50 @@ a.nav-link:hover:after {
 .dropdown-menu.show {
   transform: unset !important;
 }
+.dashboardWrapper {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  height: 100vh;
+}
+
+.dashboardWrapper .graph {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.activeSupplyOrders {
+  display: flex;
+  flex-direction: column;
+}
+.activeSupplyOrders .title {
+  text-align: center;
+  color: #333333;
+  font-size: 18px;
+  fill: #333333;
+  font-weight: 400;
+  margin-bottom: 20px;
+}
+
+.dashBoardSupplyLog {
+  border-left: 5px solid salmon !important;
+}
+
+.noData {
+  color: gainsboro;
+  text-align: center;
+  font-size: 30px;
+}
+
+.centerAlign {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+
+.supplyOrderWrapperDashBoard {
+  overflow: auto;
+  padding-right: 5px;
+}
